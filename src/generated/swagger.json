@@ -1,0 +1,452 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Record_string.any_": {
+				"properties": {},
+				"additionalProperties": {},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"AttestationResponse": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"rawId": {
+						"type": "string"
+					},
+					"response": {
+						"properties": {
+							"authenticatorData": {
+								"type": "string"
+							},
+							"publicKey": {
+								"type": "string"
+							},
+							"publicKeyAlgorithm": {
+								"type": "number",
+								"format": "double"
+							},
+							"transports": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"clientDataJSON": {
+								"type": "string"
+							},
+							"attestationObject": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"authenticatorData",
+							"publicKey",
+							"publicKeyAlgorithm",
+							"transports",
+							"clientDataJSON",
+							"attestationObject"
+						],
+						"type": "object"
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"public-key"
+						],
+						"nullable": false
+					},
+					"clientExtensionResults": {
+						"$ref": "#/components/schemas/Record_string.any_"
+					},
+					"authenticatorAttachment": {
+						"type": "string",
+						"enum": [
+							"platform"
+						],
+						"nullable": false
+					}
+				},
+				"required": [
+					"id",
+					"rawId",
+					"response",
+					"type",
+					"clientExtensionResults",
+					"authenticatorAttachment"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"GeneratedPasskeyResult": {
+				"properties": {
+					"attestationData": {
+						"$ref": "#/components/schemas/AttestationResponse"
+					},
+					"privateKeyHex": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"attestationData",
+					"privateKeyHex"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"Rp": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"User": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"displayName": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"displayName",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PubKeyCredParam": {
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": [
+							"public-key"
+						],
+						"nullable": false
+					},
+					"alg": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"type",
+					"alg"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"AuthenticatorSelection": {
+				"properties": {
+					"authenticatorAttachment": {
+						"type": "string",
+						"enum": [
+							"platform",
+							"cross-platform"
+						]
+					},
+					"requireResidentKey": {
+						"type": "boolean"
+					},
+					"residentKey": {
+						"type": "string",
+						"enum": [
+							"required",
+							"preferred",
+							"discouraged"
+						]
+					},
+					"userVerification": {
+						"type": "string",
+						"enum": [
+							"required",
+							"preferred",
+							"discouraged"
+						]
+					}
+				},
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PublicKeyOptions": {
+				"properties": {
+					"rp": {
+						"$ref": "#/components/schemas/Rp"
+					},
+					"user": {
+						"$ref": "#/components/schemas/User"
+					},
+					"challenge": {
+						"type": "string"
+					},
+					"pubKeyCredParams": {
+						"items": {
+							"$ref": "#/components/schemas/PubKeyCredParam"
+						},
+						"type": "array"
+					},
+					"timeout": {
+						"type": "number",
+						"format": "double"
+					},
+					"authenticatorSelection": {
+						"$ref": "#/components/schemas/AuthenticatorSelection"
+					},
+					"attestation": {
+						"type": "string",
+						"enum": [
+							"none",
+							"indirect",
+							"direct",
+							"enterprise"
+						]
+					}
+				},
+				"required": [
+					"rp",
+					"user",
+					"challenge",
+					"pubKeyCredParams"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"PasskeyRequest": {
+				"properties": {
+					"publicKey": {
+						"$ref": "#/components/schemas/PublicKeyOptions"
+					},
+					"origin": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"publicKey",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"AssertionResponse": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"rawId": {
+						"type": "string"
+					},
+					"response": {
+						"properties": {
+							"userHandle": {
+								"type": "string"
+							},
+							"signature": {
+								"type": "string"
+							},
+							"clientDataJSON": {
+								"type": "string"
+							},
+							"authenticatorData": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"signature",
+							"clientDataJSON",
+							"authenticatorData"
+						],
+						"type": "object"
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"public-key"
+						],
+						"nullable": false
+					},
+					"clientExtensionResults": {
+						"$ref": "#/components/schemas/Record_string.any_"
+					},
+					"authenticatorAttachment": {
+						"type": "string",
+						"enum": [
+							"platform"
+						],
+						"nullable": false
+					}
+				},
+				"required": [
+					"id",
+					"rawId",
+					"response",
+					"type",
+					"clientExtensionResults",
+					"authenticatorAttachment"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"LoginChallengeOptions": {
+				"properties": {
+					"challenge": {
+						"type": "string"
+					},
+					"timeout": {
+						"type": "number",
+						"format": "double"
+					},
+					"rpId": {
+						"type": "string"
+					},
+					"userVerification": {
+						"type": "string",
+						"enum": [
+							"required",
+							"preferred",
+							"discouraged"
+						]
+					}
+				},
+				"required": [
+					"challenge",
+					"rpId"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"LoginChallengeRequest": {
+				"properties": {
+					"publicKey": {
+						"$ref": "#/components/schemas/LoginChallengeOptions"
+					},
+					"privateKeyHex": {
+						"type": "string"
+					},
+					"credentialIdB64Url": {
+						"type": "string"
+					},
+					"origin": {
+						"type": "string"
+					},
+					"counter": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"publicKey",
+					"privateKeyHex",
+					"credentialIdB64Url",
+					"origin",
+					"counter"
+				],
+				"type": "object",
+				"additionalProperties": true
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "any-api-server",
+		"version": "1.0.0",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/api/passkey/generate": {
+			"post": {
+				"operationId": "GeneratePasskey",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GeneratedPasskeyResult"
+								}
+							}
+						}
+					}
+				},
+				"description": "Принимает publicKey для создания Passkey и генерирует валидный ответ attestationData на лету.",
+				"tags": [
+					"Passkey Automation"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PasskeyRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/passkey/login": {
+			"post": {
+				"operationId": "LoginPasskey",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AssertionResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Принимает новый challenge от МТС и приватный ключ, возвращая готовую структуру для входа.",
+				"tags": [
+					"Passkey Automation"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginChallengeRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
