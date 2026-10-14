@@ -20,7 +20,7 @@ try {
   const swaggerDocument = await import("./generated/swagger.json", {
     with: { type: 'json' }
   });
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument.default));
 } catch (err) {
   console.log('Swagger-файл пока не сгенерирован. Запустите сборку роутов.');
 }
